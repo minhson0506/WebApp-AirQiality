@@ -1,41 +1,46 @@
 import { useState } from 'react';
-import {doGraphQLFetch} from '../hooks/fetch';
-import {getDevices} from '../hooks/queries';
-import {Device} from '../interfaces/Device';
+import { doGraphQLFetch } from '../hooks/fetch';
+import { getDevices } from '../hooks/queries';
+import { Device } from '../interfaces/Device';
+import { useMainContext } from '../contexts/MainContext';
 
 interface Props {}
 
 const LandingPage: React.FC<Props> = () => {
     // const apiUrl = process.env.REACT_APP_API_URL;
-    const apiUrl = 'https://airqualitybackend.onrender.com/graphql'
+    const apiUrl = 'https://airqualitybackend.onrender.com/graphql';
     const [displayDevices, setDisplayDevices] = useState<boolean>(false);
     const [devices, setDevices] = useState<Device[]>([]); // [id, deviceName, deviceId]
 
-    const searchDevices = async() => {
+    const { setDeviceName } = useMainContext();
+
+    const searchDevices = async () => {
         const data = await doGraphQLFetch(apiUrl, getDevices, {});
         setDevices(data.allDevices);
         setDisplayDevices(true);
     };
 
     return (
-        <div className="App">
+        <div>
             <img src={require('../pictures/landing.png')} alt="landing page" style={{ width: '20%' }} />
-            {displayDevices ? 
-            <div>
-                <h1>Devices</h1>
-                {devices.map((device: Device) => {
-                    return (
-                        <div>
-                            <h2>{device.deviceName}</h2>
-                            <h3>{device.deviceId}</h3>
-                        </div>
-                    );
-                })}
-            </div> : <></>}
-            <button
-                onClick={searchDevices}>
-                Search device
-            </button>
+            {displayDevices ? (
+                <div>
+                    <h1>Devices</h1>
+                    {devices.map((device: Device) => {
+                        return (
+                            <button
+                                onClick={() => {
+                                    setDeviceName(device.deviceName);
+                                }}>
+                                {device.deviceName}
+                            </button>
+                        );
+                    })}
+                </div>
+            ) : (
+                <></>
+            )}
+            <button onClick={searchDevices}>Search device</button>
         </div>
     );
 };
