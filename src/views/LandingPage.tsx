@@ -7,10 +7,9 @@ import { useMainContext } from '../contexts/MainContext';
 interface Props {}
 
 const LandingPage: React.FC<Props> = () => {
-    // const apiUrl = process.env.REACT_APP_API_URL;
-    const apiUrl = 'https://airqualitybackend.onrender.com/graphql';
+    const apiUrl = process.env.REACT_APP_API_URL as string;
     const [displayDevices, setDisplayDevices] = useState<boolean>(false);
-    const [devices, setDevices] = useState<Device[]>([]); // [id, deviceName, deviceId]
+    const [devices, setDevices] = useState<Device[]>([]);
 
     const { setDeviceName } = useMainContext();
 
@@ -21,10 +20,10 @@ const LandingPage: React.FC<Props> = () => {
     };
 
     return (
-        <div>
-            <img src={require('../pictures/landing.png')} alt="landing page" style={{ width: '20%' }} />
+        <div style={{width: '20%', display: 'flex', flexDirection: 'column'}}>
+            <img src={require('../pictures/landing.png')} alt="landing page" style={{ width: '100%' }} />
             {displayDevices ? (
-                <div>
+                <div style={{display: 'flex', flexDirection: 'column'}}>
                     <h1>Devices</h1>
                     {devices.map((device: Device) => {
                         return (
