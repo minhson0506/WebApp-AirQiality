@@ -1,8 +1,4 @@
-import { useEffect, useState } from 'react';
-import { useMainContext } from '../contexts/MainContext';
-import { doGraphQLFetch } from '../hooks/fetch';
-import { getLatestSensorData } from '../hooks/queries';
-import { SensorData } from '../interfaces/SensorData';
+import { useState } from 'react';
 import 'font-awesome/css/font-awesome.min.css';
 import Dashboard from '../components/Dashboard';
 import Chart from '../components/Chart';
@@ -11,13 +7,6 @@ import Setting from '../components/Setting';
 interface Props {}
 
 const HomePage: React.FC<Props> = () => {
-    const apiUrl = process.env.REACT_APP_API_URL as string;
-
-    const { deviceName } = useMainContext();
-
-    const [seconds, setSeconds] = useState(0);
-    const [sensorData, setSensorData] = useState<SensorData | null>(null);
-
     // tab data
     const [state, setState] = useState({
         data: [
@@ -27,30 +16,6 @@ const HomePage: React.FC<Props> = () => {
         ],
         current: 0,
     });
-
-    // get latest data
-    const updateData = async () => {
-        const data = await doGraphQLFetch(apiUrl, getLatestSensorData, { deviceName: deviceName });
-        console.log('data latest', data);
-        setSensorData(data.latestSensorData[0]);
-    };
-
-    useEffect(() => {
-        updateData();
-    }, []);
-
-    // update data every 5 minutes
-    useEffect(() => {
-        const interval = setInterval(() => {
-            if (seconds === 100) {
-                setSeconds(0);
-            } else {
-                setSeconds(seconds + 1);
-            }
-            updateData();
-        }, 300000);
-        return () => clearInterval(interval);
-    }, []);
 
     return (
         <div>
