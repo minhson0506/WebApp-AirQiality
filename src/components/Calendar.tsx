@@ -53,45 +53,16 @@ const Calendar: React.FC<Props> = (prop: Props) => {
         const dateFormat = 'MMM yyyy';
         // console.log("selected day", selectedDate);
         return (
-            <div
-                style={{
-                    display: 'block',
-                    width: '100%',
-                    padding: '1.75em 0',
-                    borderBottom: '1px solid var(--border-color)',
-                    background: 'var(--neutral-color)',
-                }}>
-                <div
-                    className="col col-start"
-                    style={{
-                        flexGrow: '1',
-                        flexBasis: '0',
-                        maxWidth: '100%',
-                        justifyContent: 'flex-start',
-                        textAlign: 'left',
-                    }}>
+            <div className="header row flex-middle">
+                <div className="col col-start">
                     {/* <div className="icon" onClick={() => changeMonthHandle("prev")}>
             prev month
           </div> */}
                 </div>
-                <div
-                    style={{
-                        flexGrow: '1',
-                        flexBasis: '0',
-                        maxWidth: '100%',
-                        justifyContent: 'center',
-                        textAlign: 'center',
-                    }}>
+                <div className="col col-center">
                     <span>{format(currentMonth, dateFormat)}</span>
                 </div>
-                <div
-                    style={{
-                        flexGrow: '1',
-                        flexBasis: '0',
-                        maxWidth: '100%',
-                        justifyContent: 'flex-end',
-                        textAlign: 'end',
-                    }}>
+                <div className="col col-end">
                     {/* <div className="icon" onClick={() => changeMonthHandle("next")}>next month</div> */}
                 </div>
             </div>
@@ -103,15 +74,7 @@ const Calendar: React.FC<Props> = (prop: Props) => {
         let startDate = startOfWeek(currentMonth, { weekStartsOn: 1 });
         for (let i = 0; i < 7; i++) {
             days.push(
-                <div
-                    style={{
-                        flexGrow: '1',
-                        flexBasis: '0',
-                        maxWidth: '100%',
-                        justifyContent: 'center',
-                        textAlign: 'center',
-                    }}
-                    key={i}>
+                <div className="col col-center" key={i}>
                     {format(addDays(startDate, i), dateFormat)}
                 </div>,
             );
@@ -137,7 +100,7 @@ const Calendar: React.FC<Props> = (prop: Props) => {
                         }`}
                         // key={day}
                         onClick={() => {
-                            const dayStr = format(cloneDay, 'ccc dd MMM yy');
+                            const dayStr = format(cloneDay, 'yyyy-MM-dd');
                             onDateClickHandle(cloneDay, dayStr);
                         }}>
                         <span className="number">{formattedDate}</span>
