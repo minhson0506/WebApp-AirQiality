@@ -35,7 +35,22 @@ const ChartPage: React.FC<Props> = () => {
         if (indicator !== null) {
             setDataDisplay(
                 response.sensorDataInDate.map((sensor: SensorData) => {
-                    return { time: sensor.time, value: sensor. } as DataDisplay;
+                    let value;
+                    switch (indicator) {
+                        case 'alt': value = { time: sensor.time, value: sensor.alt }; break;
+                        case 'co2': value = { time: sensor.time, value: sensor.co2 }; break;
+                        case 'hum': value = { time: sensor.time, value: sensor.hum }; break;
+                        case 'lux': value = { time: sensor.time, value: sensor.lux }; break;
+                        case 'noise': value = { time: sensor.time, value: sensor.noise }; break;
+                        case 'pm1': value = { time: sensor.time, value: sensor.pm1 }; break;
+                        case 'pm10': value = { time: sensor.time, value: sensor.pm10 }; break;
+                        case 'pm2_5': value = { time: sensor.time, value: sensor.pm2_5 }; break;
+                        case 'pm4': value = { time: sensor.time, value: sensor.pm4 }; break;
+                        case 'pres': value = { time: sensor.time, value: sensor.pres }; break;
+                        case 'temp': value = { time: sensor.time, value: sensor.temp }; break;
+                        default: value = { time: sensor.time, value: sensor.alt }; break;
+                    }
+                    return value;
                 }),
             );
         }
