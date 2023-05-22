@@ -26,34 +26,78 @@ const ChartPage: React.FC<Props> = () => {
         setShowDetails(true);
     };
 
-    const indicatorData = ['alt', 'co2', 'hum', 'lux', 'noise', 'pm1', 'pm10', 'pm2_5', 'pm4', 'pres', 'temp']
+    const indicatorData = ['alt', 'co2', 'hum', 'lux', 'noise', 'pm1', 'pm10', 'pm2_5', 'pm4', 'pres', 'temp'];
     // get data for display
     const getData = async () => {
         const response = await doGraphQLFetch(apiUrl, getSensorDataInDate, { deviceName: deviceName, date: data });
         // console.log(`data in date ${data}`, response);
         // setSensorData(response.sensorDataInDate);
+        let dataDisplays: DataDisplay[];
         if (indicator !== null) {
-            setDataDisplay(
-                response.sensorDataInDate.map((sensor: SensorData) => {
-                    let value : DataDisplay;
-                    switch (indicator) {
-                        case 'alt': value = { time: sensor.time, value: sensor.alt }; break;
-                        case 'co2': value = { time: sensor.time, value: sensor.co2 }; break;
-                        case 'hum': value = { time: sensor.time, value: sensor.hum }; break;
-                        case 'lux': value = { time: sensor.time, value: sensor.lux }; break;
-                        case 'noise': value = { time: sensor.time, value: sensor.noise }; break;
-                        case 'pm1': value = { time: sensor.time, value: sensor.pm1 }; break;
-                        case 'pm10': value = { time: sensor.time, value: sensor.pm10 }; break;
-                        case 'pm2_5': value = { time: sensor.time, value: sensor.pm2_5 }; break;
-                        case 'pm4': value = { time: sensor.time, value: sensor.pm4 }; break;
-                        case 'pres': value = { time: sensor.time, value: sensor.pres }; break;
-                        case 'temp': value = { time: sensor.time, value: sensor.temp }; break;
-                        default: value = { time: sensor.time, value: sensor.alt }; break;
-                    }
-                    return value;
-                }),
-            );
-        }
+            dataDisplays = response.sensorDataInDate.map((sensor: SensorData) => {
+                let value: DataDisplay;
+                switch (indicator) {
+                    case 'alt':
+                        value = { time: sensor.time, value: sensor.alt };
+                        break;
+                    case 'co2':
+                        value = { time: sensor.time, value: sensor.co2 };
+                        break;
+                    case 'hum':
+                        value = { time: sensor.time, value: sensor.hum };
+                        break;
+                    case 'lux':
+                        value = { time: sensor.time, value: sensor.lux };
+                        break;
+                    case 'noise':
+                        value = { time: sensor.time, value: sensor.noise };
+                        break;
+                    case 'pm1':
+                        value = { time: sensor.time, value: sensor.pm1 };
+                        break;
+                    case 'pm10':
+                        value = { time: sensor.time, value: sensor.pm10 };
+                        break;
+                    case 'pm2_5':
+                        value = { time: sensor.time, value: sensor.pm2_5 };
+                        break;
+                    case 'pm4':
+                        value = { time: sensor.time, value: sensor.pm4 };
+                        break;
+                    case 'pres':
+                        value = { time: sensor.time, value: sensor.pres };
+                        break;
+                    case 'temp':
+                        value = { time: sensor.time, value: sensor.temp };
+                        break;
+                    default:
+                        value = { time: sensor.time, value: sensor.alt };
+                        break;
+                }
+                return value;
+            });
+        } else
+            dataDisplays = response.sensorDataInDate.map((sensor: SensorData) => {
+                return { time: sensor.time, value: sensor.alt };
+            });
+        
+        // filter data in hours
+        dataDisplays = dataDisplays.map((curr: DataDisplay) => {
+            let time = new Date(curr.time);
+            time.setSeconds(0);
+            time.setMinutes(0);
+            return { time: time, value: curr.value };
+        }).reduce((acc: DataDisplay[], curr: DataDisplay) => {
+            if (acc.length === 0) {
+                acc.push(curr);
+            } else {
+                if (!acc.find((item) => item.time.getTime() === curr.time.getTime()))
+                    acc.push(curr);
+            }
+            return acc;
+        }, []);
+
+        setDataDisplay(dataDisplays);
     };
 
     useEffect(() => {

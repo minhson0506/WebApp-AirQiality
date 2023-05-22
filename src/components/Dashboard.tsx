@@ -17,7 +17,7 @@ const Dashboard: React.FC<Props> = () => {
     // get latest data
     const updateData = async () => {
         const data = await doGraphQLFetch(apiUrl, getLatestSensorData, { deviceName: deviceName });
-        console.log('data latest', data);
+        // console.log('data latest', data);
         setSensorData(data.latestSensorData[0]);
     };
 
