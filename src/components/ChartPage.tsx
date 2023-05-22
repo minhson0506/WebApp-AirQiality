@@ -35,7 +35,7 @@ const ChartPage: React.FC<Props> = () => {
         if (indicator !== null) {
             setDataDisplay(
                 response.sensorDataInDate.map((sensor: SensorData) => {
-                    let value;
+                    let value : DataDisplay;
                     switch (indicator) {
                         case 'alt': value = { time: sensor.time, value: sensor.alt }; break;
                         case 'co2': value = { time: sensor.time, value: sensor.co2 }; break;
