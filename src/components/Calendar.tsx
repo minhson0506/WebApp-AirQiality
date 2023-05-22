@@ -11,12 +11,14 @@ import {
     addWeeks,
     subWeeks,
 } from 'date-fns';
+import {useMainContext} from '../contexts/MainContext';
 
 interface Props {
     showDetailsHandle: (dayStr: string) => void;
 }
 
 const Calendar: React.FC<Props> = (prop: Props) => {
+    const {loading, setLoading} = useMainContext();
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [currentWeek, setCurrentWeek] = useState(getWeek(currentMonth));
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -47,6 +49,7 @@ const Calendar: React.FC<Props> = (prop: Props) => {
     const onDateClickHandle = (day: Date, dayStr: string) => {
         setSelectedDate(day);
         prop.showDetailsHandle(dayStr);
+        setLoading(!loading);
     };
 
     const renderHeader = () => {
@@ -55,15 +58,15 @@ const Calendar: React.FC<Props> = (prop: Props) => {
         return (
             <div className="header row flex-middle">
                 <div className="col col-start">
-                    {/* <div className="icon" onClick={() => changeMonthHandle("prev")}>
+                    <div className="icon" onClick={() => changeMonthHandle("prev")}>
             prev month
-          </div> */}
+          </div>
                 </div>
                 <div className="col col-center">
                     <span>{format(currentMonth, dateFormat)}</span>
                 </div>
                 <div className="col col-end">
-                    {/* <div className="icon" onClick={() => changeMonthHandle("next")}>next month</div> */}
+                    <div className="icon" onClick={() => changeMonthHandle("next")}>next month</div>
                 </div>
             </div>
         );

@@ -1,33 +1,27 @@
-import { SensorData } from '../interfaces/SensorData';
 import { Axis, Orient } from 'd3-axis-for-react';
 import * as d3 from 'd3';
+import { DataDisplay } from '../interfaces/DataDisplay';
 
 interface Props {
-    data: SensorData[];
-    indicator: string;
+    data: DataDisplay[];
 }
 
-interface Data {
-    date: Date;
-    value: number;
-}
 const Chart: React.FC<Props> = (props: Props) => {
-    const data = (
-        props.data.map((d: SensorData) => {
-            return {
-                date: new Date(d.time),
-                value: +d.pm10,
-            };
-        }) as Data[]
-    ).sort((a: Data, b: Data) => a.date.getTime() - b.date.getTime());
+    const data = props.data.map((d: any) => {
+        return {
+            time: new Date(d.time),
+            value: +d.value,
+        };
+    }) as DataDisplay[];
 
+    console.log('data', data);
     const width = 600;
     const height = 400;
     const margin = { top: 20, right: 30, bottom: 30, left: 40 };
 
     const x = d3
         .scaleUtc()
-        .domain(d3.extent(data, (d) => d.date) as [Date, Date])
+        .domain(d3.extent(data, (d) => d.time) as [Date, Date])
         .range([margin.left, width - margin.right]);
 
     const y = d3
@@ -37,14 +31,13 @@ const Chart: React.FC<Props> = (props: Props) => {
         .range([height - margin.bottom, margin.top]);
 
     const line = d3
-        .line<Data>()
+        .line<DataDisplay>()
         .defined((d) => !isNaN(d.value))
-        .x((d) => x(d.date))
+        .x((d) => x(d.time))
         .y((d) => y(d.value));
 
     return (
         <div>
-            <h1>{props.indicator}</h1>
             <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
                 <g transform={`translate(0,${height - margin.bottom})`}>
                     <Axis scale={x} orient={Orient.bottom} />
