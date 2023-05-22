@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import 'font-awesome/css/font-awesome.min.css';
 import Dashboard from '../components/Dashboard';
-import Chart from '../components/Chart';
 import Setting from '../components/Setting';
+import ChartPage from '../components/ChartPage';
 
 interface Props {}
 
@@ -19,7 +19,7 @@ const HomePage: React.FC<Props> = () => {
 
     return (
         <div>
-            {state.current === 0 ? <Dashboard/> : state.current === 1 ? <Chart/> : <Setting/>}
+            {state.current === 0 ? <Dashboard/> : state.current === 1 ? <ChartPage/> : <Setting/>}
             <div
                 style={{
                     display: 'flex',
