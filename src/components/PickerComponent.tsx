@@ -9,7 +9,7 @@ const PickerComponent: React.FC<Props> = (props: Props) => {
     return (
         <select name="select indicator" onChange={e => {setIndicator(e.target.value); setLoading(!loading)}}>
             {props.data.map((item: string) => {
-                return <option value={item}>{item}</option>;
+                return <option value={item} key={item}>{item}</option>;
             })}
         </select>
     );

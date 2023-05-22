@@ -71,6 +71,7 @@ const Calendar: React.FC<Props> = (prop: Props) => {
             </div>
         );
     };
+
     const renderDays = () => {
         const dateFormat = 'EEE';
         const days = [];
@@ -84,6 +85,7 @@ const Calendar: React.FC<Props> = (prop: Props) => {
         }
         return <div className="days row">{days}</div>;
     };
+
     const renderCells = () => {
         const startDate = startOfWeek(currentMonth, { weekStartsOn: 1 });
         const endDate = lastDayOfWeek(currentMonth, { weekStartsOn: 1 });
@@ -101,19 +103,19 @@ const Calendar: React.FC<Props> = (prop: Props) => {
                         className={`col cell ${
                             isSameDay(day, new Date()) ? 'today' : isSameDay(day, selectedDate) ? 'selected' : ''
                         }`}
-                        // key={day}
+                        key={day.getDay() + i}
                         onClick={() => {
                             const dayStr = format(cloneDay, 'yyyy-MM-dd');
                             onDateClickHandle(cloneDay, dayStr);
                         }}>
-                        <span className="number">{formattedDate}</span>
-                        <span className="bg">{formattedDate}</span>
+                        <span className="number" key={day.getDay() + "number" + i}>{formattedDate}</span>
+                        <span className="bg" key={day.getDay() + "bg" + i}>{formattedDate}</span>
                     </div>,
                 );
                 day = addDays(day, 1);
             }
 
-            rows.push(<div className="row">{days}</div>);
+            rows.push(<div className="row" key={day.getDay()}>{days}</div>);
             days = [];
         }
         return <div className="body">{rows}</div>;

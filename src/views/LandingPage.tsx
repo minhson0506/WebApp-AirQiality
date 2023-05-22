@@ -30,7 +30,8 @@ const LandingPage: React.FC<Props> = () => {
                             <button
                                 onClick={() => {
                                     setDeviceName(device.deviceName);
-                                }}>
+                                }}
+                                key={device.deviceId}>
                                 {device.deviceName}
                             </button>
                         );
