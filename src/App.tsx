@@ -8,8 +8,10 @@ function App() {
     const [deviceName, setDeviceName] = React.useState<string | null>(null);
     const [loading, setLoading] = React.useState<boolean>(false);
     const [indicator, setIndicator] = React.useState<string | null>(null);
+    const [location, setLocation] = React.useState<string | null>(null);
+    
     return (
-        <MainContext.Provider value={{ deviceName, setDeviceName, loading, setLoading, indicator, setIndicator }}>
+        <MainContext.Provider value={{ deviceName, setDeviceName, loading, setLoading, indicator, setIndicator, location, setLocation}}>
             {deviceName == null ? <LandingPage /> : <HomePage />}
         </MainContext.Provider>
     );

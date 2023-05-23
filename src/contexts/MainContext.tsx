@@ -7,6 +7,8 @@ export type ContextType = {
     setLoading: React.Dispatch<React.SetStateAction<boolean>>;
     indicator: string | null;
     setIndicator: React.Dispatch<React.SetStateAction<string | null>>;
+    location: string | null;
+    setLocation: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 export const MainContext = createContext<ContextType>({
@@ -16,6 +18,8 @@ export const MainContext = createContext<ContextType>({
     setLoading: () => {},
     indicator: null,
     setIndicator: () => {},
+    location: null,
+    setLocation: () => {}
 });
 
 export const useMainContext = () => useContext(MainContext);

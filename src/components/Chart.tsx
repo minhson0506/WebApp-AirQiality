@@ -14,7 +14,7 @@ const Chart: React.FC<Props> = (props: Props) => {
         };
     }) as DataDisplay[];
 
-    console.log('data', data);
+    // console.log('data', data);
     const width = 600;
     const height = 400;
     const margin = { top: 20, right: 30, bottom: 30, left: 40 };

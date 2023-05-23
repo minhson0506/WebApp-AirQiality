@@ -11,14 +11,14 @@ import {
     addWeeks,
     subWeeks,
 } from 'date-fns';
-import {useMainContext} from '../contexts/MainContext';
+import { useMainContext } from '../contexts/MainContext';
 
 interface Props {
     showDetailsHandle: (dayStr: string) => void;
 }
 
 const Calendar: React.FC<Props> = (prop: Props) => {
-    const {loading, setLoading} = useMainContext();
+    const { loading, setLoading } = useMainContext();
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [currentWeek, setCurrentWeek] = useState(getWeek(currentMonth));
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -58,15 +58,17 @@ const Calendar: React.FC<Props> = (prop: Props) => {
         return (
             <div className="header row flex-middle">
                 <div className="col col-start">
-                    <div className="icon" onClick={() => changeMonthHandle("prev")}>
-            prev month
-          </div>
+                    <div className="icon" onClick={() => changeMonthHandle('prev')}>
+                        prev month
+                    </div>
                 </div>
                 <div className="col col-center">
                     <span>{format(currentMonth, dateFormat)}</span>
                 </div>
                 <div className="col col-end">
-                    <div className="icon" onClick={() => changeMonthHandle("next")}>next month</div>
+                    <div className="icon" onClick={() => changeMonthHandle('next')}>
+                        next month
+                    </div>
                 </div>
             </div>
         );
@@ -108,14 +110,22 @@ const Calendar: React.FC<Props> = (prop: Props) => {
                             const dayStr = format(cloneDay, 'yyyy-MM-dd');
                             onDateClickHandle(cloneDay, dayStr);
                         }}>
-                        <span className="number" key={day.getDay() + "number" + i}>{formattedDate}</span>
-                        <span className="bg" key={day.getDay() + "bg" + i}>{formattedDate}</span>
+                        <span className="number" key={day.getDay() + 'number' + i}>
+                            {formattedDate}
+                        </span>
+                        <span className="bg" key={day.getDay() + 'bg' + i}>
+                            {formattedDate}
+                        </span>
                     </div>,
                 );
                 day = addDays(day, 1);
             }
 
-            rows.push(<div className="row" key={day.getDay()}>{days}</div>);
+            rows.push(
+                <div className="row" key={day.getDay()}>
+                    {days}
+                </div>,
+            );
             days = [];
         }
         return <div className="body">{rows}</div>;
