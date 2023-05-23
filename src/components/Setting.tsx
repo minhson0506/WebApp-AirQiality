@@ -1,10 +1,10 @@
 import { RangeSlider } from 'rsuite';
 import 'rsuite/dist/rsuite.css';
 import { useMainContext } from '../contexts/MainContext';
+import { BoldTextStyle, colors, flexBoxWithBG } from '../styles';
+import CSS from 'csstype';
 
-interface Props {}
-
-const Setting: React.FC<Props> = () => {
+const Setting = () => {
     const {
         pm10,
         setPm10,
@@ -24,137 +24,140 @@ const Setting: React.FC<Props> = () => {
         setHum,
         pres,
         setPres,
-        alt,
-        setAlt,
         noise,
         setNoise,
     } = useMainContext();
 
+    const settingArray = [
+        {
+            id: 0,
+            name: 'Pm10',
+            value: pm10,
+            setValue: setPm10,
+        },
+        {
+            id: 1,
+            name: 'Pm2.5',
+            value: pm25,
+            setValue: setPm25,
+        },
+        {
+            id: 2,
+            name: 'Pm1',
+            value: pm1,
+            setValue: setPm1,
+        },
+        {
+            id: 3,
+            name: 'Pm4',
+            value: pm4,
+            setValue: setPm4,
+        },
+        {
+            id: 4,
+            name: 'CO2',
+            value: co2,
+            setValue: setCo2,
+        },
+        {
+            id: 5,
+            name: 'Humidity',
+            value: hum,
+            setValue: setHum,
+        },
+        {
+            id: 6,
+            name: 'Light',
+            value: lux,
+            setValue: setLux,
+        },
+        {
+            id: 7,
+            name: 'Noise',
+            value: noise,
+            setValue: setNoise,
+        },
+        {
+            id: 8,
+            name: 'Pressure',
+            value: pres,
+            setValue: setPres,
+        },
+        {
+            id: 9,
+            name: 'Temp',
+            value: temp,
+            setValue: setTemp,
+        },
+    ];
+
     return (
-        <div style={{ height: '100%' }}>
-            <p>Pm10</p>
-            <p>
-                Min: {pm10[0]} - Max: {pm10[1]}{' '}
-            </p>
-            <RangeSlider
-                style={{ marginTop: 16, background: 'yellow' }}
-                value={pm10}
-                onChange={(value) => {
-                    setPm10(value);
-                }}
-            />
-            <p>Pm2.5</p>
-            <p>
-                Min: {pm25[0]} - Max: {pm25[1]}{' '}
-            </p>
-            <RangeSlider
-                style={{ marginTop: 16, background: 'yellow' }}
-                value={pm25}
-                onChange={(value) => {
-                    setPm25(value);
-                }}
-            />
-            <p>Pm1</p>
-            <p>
-                Min: {pm1[0]} - Max: {pm1[1]}{' '}
-            </p>
-            <RangeSlider
-                style={{ marginTop: 16, background: 'yellow' }}
-                value={pm1}
-                onChange={(value) => {
-                    setPm1(value);
-                }}
-            />
-            <p>Pm4</p>
-            <p>
-                Min: {pm4[0]} - Max: {pm4[1]}{' '}
-            </p>
-            <RangeSlider
-                style={{ marginTop: 16, background: 'yellow' }}
-                value={pm4}
-                onChange={(value) => {
-                    setPm4(value);
-                }}
-            />
-            <p>Light</p>
-            <p>
-                Min: {lux[0]} - Max: {lux[1]}{' '}
-            </p>
-            <RangeSlider
-                style={{ marginTop: 16, background: 'yellow' }}
-                value={lux}
-                onChange={(value) => {
-                    setLux(value);
-                }}
-            />
-            <p>Temperate</p>
-            <p>
-                Min: {temp[0]} - Max: {temp[1]}{' '}
-            </p>
-            <RangeSlider
-                style={{ marginTop: 16, background: 'yellow' }}
-                value={temp}
-                onChange={(value) => {
-                    setTemp(value);
-                }}
-            />
-            <p>CO2</p>
-            <p>
-                Min: {co2[0]} - Max: {co2[1]}{' '}
-            </p>
-            <RangeSlider
-                style={{ marginTop: 16, background: 'yellow' }}
-                value={co2}
-                onChange={(value) => {
-                    setCo2(value);
-                }}
-            />
-            <p>Humidity</p>
-            <p>
-                Min: {hum[0]} - Max: {hum[1]}{' '}
-            </p>
-            <RangeSlider
-                style={{ marginTop: 16, background: 'yellow' }}
-                value={hum}
-                onChange={(value) => {
-                    setHum(value);
-                }}
-            />
-            <p>Pressure</p>
-            <p>
-                Min: {pres[0]} - Max: {pres[1]}{' '}
-            </p>
-            <RangeSlider
-                style={{ marginTop: 16, background: 'yellow' }}
-                value={pres}
-                onChange={(value) => {
-                    setPres(value);
-                }}
-            />
-            <p>Alt</p>
-            <p>
-                Min: {alt[0]} - Max: {alt[1]}{' '}
-            </p>
-            <RangeSlider
-                style={{ marginTop: 16, background: 'yellow' }}
-                value={alt}
-                onChange={(value) => {
-                    setAlt(value);
-                }}
-            />
-            <p>Noise</p>
-            <p>
-                Min: {noise[0]} - Max: {noise[1]}{' '}
-            </p>
-            <RangeSlider
-                style={{ marginTop: 16, background: 'yellow' }}
-                value={noise}
-                onChange={(value) => {
-                    setNoise(value);
-                }}
-            />
+        <div style={flexBoxWithBG}>
+            <div style={CardStyle}>
+                <p style={BoldTextStyle}>Change device name</p>
+                <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
+                    <input
+                        style={{
+                            border: '0px',
+                            background: colors.lightGray,
+                            borderRadius: '4px',
+                            width: '80%',
+                            height: '50px',
+                        }}></input>
+                    <img
+                        src={require('../pictures/checkbox.png')}
+                        alt="check-box"
+                        style={{ width: '50px', height: '50px' }}></img>
+                </div>
+            </div>
+            <div style={BigCardStyle}>
+                {settingArray.map((item, index) => (
+                    <div key={index} style={{ marginBottom: '30px' }}>
+                        <div style={Row}>
+                            <p style={BoldTextStyle}>{item.name}</p>
+                            <p>
+                                Min: {item.value[0]} - Max: {item.value[1]}{' '}
+                            </p>
+                        </div>
+                        <RangeSlider
+                            style={{ marginTop: '10px' }}
+                            value={item.value}
+                            onChange={(value) => {
+                                item.setValue(value);
+                            }}
+                        />
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
 
 export default Setting;
+
+const CardStyle: CSS.Properties = {
+    backgroundColor: 'white',
+    borderRadius: '4px',
+    margin: '10px 20px 10px 20px',
+    padding: '20px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '5px',
+};
+
+const BigCardStyle: CSS.Properties = {
+    backgroundColor: 'white',
+    borderRadius: '4px',
+    margin: '10px 20px 80px 20px',
+    padding: '20px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '5px',
+};
+
+const Row: CSS.Properties = {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+};
