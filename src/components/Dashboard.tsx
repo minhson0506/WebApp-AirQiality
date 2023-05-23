@@ -42,7 +42,7 @@ const Dashboard: React.FC<Props> = () => {
         getWeatherData();
     }, []);
 
-    // update data every 5 minutes
+    // update data every 1 minutes
     useEffect(() => {
         const interval = setInterval(() => {
             if (seconds === 100) {
@@ -51,7 +51,7 @@ const Dashboard: React.FC<Props> = () => {
                 setSeconds(seconds + 1);
             }
             updateData();
-        }, 300000);
+        }, 60000);
         return () => clearInterval(interval);
     }, []);
 
@@ -187,7 +187,7 @@ const Dashboard: React.FC<Props> = () => {
                             border: 'solid 1px',
                         }}>
                         <div style={{ width: '100%', height: '50%', display: 'flex', flexDirection: 'row' }}>
-                            <img src={require('../pictures/wind.png')} alt="wind" style={{ width: '20px' }} />
+                            <img src={require('../pictures/co2.png')} alt="wind" style={{ width: '20px' }} />
                             <p>CO2</p>
                         </div>
                         <p>{sensorData?.co2}</p>
@@ -202,7 +202,7 @@ const Dashboard: React.FC<Props> = () => {
                             border: 'solid 1px',
                         }}>
                         <div style={{ width: '100%', height: '50%', display: 'flex', flexDirection: 'row' }}>
-                            <img src={require('../pictures/wind.png')} alt="wind" style={{ width: '20px' }} />
+                            <img src={require('../pictures/humidity.png')} alt="wind" style={{ width: '20px' }} />
                             <p>Humidity</p>
                         </div>
                         <p>{sensorData?.hum}</p>
@@ -219,7 +219,7 @@ const Dashboard: React.FC<Props> = () => {
                             border: 'solid 1px',
                         }}>
                         <div style={{ width: '100%', height: '50%', display: 'flex', flexDirection: 'row' }}>
-                            <img src={require('../pictures/wind.png')} alt="wind" style={{ width: '20px' }} />
+                            <img src={require('../pictures/light.png')} alt="wind" style={{ width: '20px' }} />
                             <p>Light</p>
                         </div>
                         <p>{sensorData?.lux}</p>
@@ -234,11 +234,28 @@ const Dashboard: React.FC<Props> = () => {
                             border: 'solid 1px',
                         }}>
                         <div style={{ width: '100%', height: '50%', display: 'flex', flexDirection: 'row' }}>
-                            <img src={require('../pictures/wind.png')} alt="wind" style={{ width: '20px' }} />
+                            <img src={require('../pictures/sound.png')} alt="wind" style={{ width: '20px' }} />
                             <p>Noise</p>
                         </div>
                         <p>{sensorData?.noise}</p>
                         <p>dB</p>
+                    </div>
+                </div>
+                <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'row' }}>
+                    <div
+                        style={{
+                            width: '50%',
+                            height: '100%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            border: 'solid 1px',
+                        }}>
+                        <div style={{ width: '100%', height: '50%', display: 'flex', flexDirection: 'row' }}>
+                            <img src={require('../pictures/temp.png')} alt="wind" style={{ width: '20px' }} />
+                            <p>Temp</p>
+                        </div>
+                        <p>{sensorData?.temp}</p>
+                        <p>lux</p>
                     </div>
                 </div>
             </div>

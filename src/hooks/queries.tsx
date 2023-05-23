@@ -5,7 +5,16 @@ const getDevices = `
         deviceName
         }
     }
-`
+`;
+
+const updateDevice = `
+    mutation updateDevice($deviceId: String!, $deviceName: String!) {
+        updateDevice(deviceId: $deviceId, deviceName: $deviceName) {
+            deviceId
+            deviceName
+        }
+    }
+`;
 
 const getAllSensorData = `
     query allData($deviceName: String!) {
@@ -29,7 +38,7 @@ const getAllSensorData = `
         noise
         }
     }
-`
+`;
 const getLatestSensorData = `
     query lastestData($deviceName: String!) {
         latestSensorData(deviceName: $deviceName) {
@@ -52,7 +61,7 @@ const getLatestSensorData = `
         noise
         }
     }
-`
+`;
 
 const getSensorDataInDate = `
     query dataInDate($deviceName: String!, $date: String!) {
@@ -76,6 +85,6 @@ const getSensorDataInDate = `
         noise
         }
     }
-`
+`;
 
-export {getDevices, getAllSensorData, getLatestSensorData, getSensorDataInDate};
+export { getDevices, getAllSensorData, getLatestSensorData, getSensorDataInDate, updateDevice };
