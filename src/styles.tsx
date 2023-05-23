@@ -19,3 +19,24 @@ export const colors = {
     lightGray: '#EBEBEB',
     darkGray: '#525151',
 };
+
+export const flexBoxWithBG: CSS.Properties = {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    height: '100%',
+    width: '100%',
+    overflowY: 'scroll',
+    backgroundColor: colors.lightBlue,
+};
+
+export const NormalTextStyle: CSS.Properties = {
+    fontSize: '18px',
+    color: 'black',
+};
+
+export const BoldTextStyle: CSS.Properties = {
+    fontSize: '18px',
+    color: 'black',
+    fontWeight: 'bold',
+};

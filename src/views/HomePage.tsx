@@ -67,4 +67,5 @@ export const bottomNavStyle: CSS.Properties = {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     background: 'white',
+    height: '60px',
 };
