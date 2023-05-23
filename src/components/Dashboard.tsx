@@ -87,148 +87,162 @@ const Dashboard: React.FC<Props> = () => {
                             style={{ width: '20px', height: '20px', paddingBottom: '5px' }}
                         />
                         <h1 style={{ fontSize: '20px', fontWeight: 'bold', color: '#000000', paddingLeft: '5px' }}>
-                            {weather?.location?.name}
+                            {weather?.location?.name !== null && weather?.location?.name.toLowerCase() !== 'nulles'
+                                ? weather?.location?.name
+                                : 'No location'}
+                        </h1>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'row' }}>
+                        <img
+                            src={`https:${weather?.current?.condition?.icon}`}
+                            alt="temperature"
+                            style={{ width: '20px', height: '20px', paddingBottom: '5px' }}
+                        />
+                        <h1 style={{ fontSize: '20px', fontWeight: 'bold', color: '#000000', paddingLeft: '5px' }}>
+                            {weather?.current?.temp_c !== null ? weather?.current?.temp_c?.toFixed(1) + '°C' : ''}
                         </h1>
                     </div>
                 </div>
             </div>
+
+            <div
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    border: 'solid 1px',
+                }}>
+                <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'row' }}>
+                    <div
+                        style={{
+                            width: '50%',
+                            height: '100%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            border: 'solid 1px',
+                        }}>
+                        <div style={{ width: '100%', height: '50%', display: 'flex', flexDirection: 'row' }}>
+                            <img src={require('../pictures/wind.png')} alt="wind" style={{ width: '20px' }} />
+                            <p>Pm10</p>
+                        </div>
+                        <p>{sensorData?.pm10}</p>
+                        <p>µg/m3</p>
+                    </div>
+                    <div
+                        style={{
+                            width: '50%',
+                            height: '100%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            border: 'solid 1px',
+                        }}>
+                        <div style={{ width: '100%', height: '50%', display: 'flex', flexDirection: 'row' }}>
+                            <img src={require('../pictures/wind.png')} alt="wind" style={{ width: '20px' }} />
+                            <p>Pm2.5</p>
+                        </div>
+                        <p>{sensorData?.pm2_5}</p>
+                        <p>µg/m3</p>
+                    </div>
+                </div>
+                <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'row' }}>
+                    <div
+                        style={{
+                            width: '50%',
+                            height: '100%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            border: 'solid 1px',
+                        }}>
+                        <div style={{ width: '100%', height: '50%', display: 'flex', flexDirection: 'row' }}>
+                            <img src={require('../pictures/wind.png')} alt="wind" style={{ width: '20px' }} />
+                            <p>Pm1</p>
+                        </div>
+                        <p>{sensorData?.pm1}</p>
+                        <p>µg/m3</p>
+                    </div>
+                    <div
+                        style={{
+                            width: '50%',
+                            height: '100%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            border: 'solid 1px',
+                        }}>
+                        <div style={{ width: '100%', height: '50%', display: 'flex', flexDirection: 'row' }}>
+                            <img src={require('../pictures/wind.png')} alt="wind" style={{ width: '20px' }} />
+                            <p>Pm4</p>
+                        </div>
+                        <p>{sensorData?.pm4}</p>
+                        <p>µg/m3</p>
+                    </div>
+                </div>
+                <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'row' }}>
+                    <div
+                        style={{
+                            width: '50%',
+                            height: '100%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            border: 'solid 1px',
+                        }}>
+                        <div style={{ width: '100%', height: '50%', display: 'flex', flexDirection: 'row' }}>
+                            <img src={require('../pictures/wind.png')} alt="wind" style={{ width: '20px' }} />
+                            <p>CO2</p>
+                        </div>
+                        <p>{sensorData?.co2}</p>
+                        <p>ppm</p>
+                    </div>
+                    <div
+                        style={{
+                            width: '50%',
+                            height: '100%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            border: 'solid 1px',
+                        }}>
+                        <div style={{ width: '100%', height: '50%', display: 'flex', flexDirection: 'row' }}>
+                            <img src={require('../pictures/wind.png')} alt="wind" style={{ width: '20px' }} />
+                            <p>Humidity</p>
+                        </div>
+                        <p>{sensorData?.hum}</p>
+                        <p>RH</p>
+                    </div>
+                </div>
+                <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'row' }}>
+                    <div
+                        style={{
+                            width: '50%',
+                            height: '100%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            border: 'solid 1px',
+                        }}>
+                        <div style={{ width: '100%', height: '50%', display: 'flex', flexDirection: 'row' }}>
+                            <img src={require('../pictures/wind.png')} alt="wind" style={{ width: '20px' }} />
+                            <p>Light</p>
+                        </div>
+                        <p>{sensorData?.lux}</p>
+                        <p>lux</p>
+                    </div>
+                    <div
+                        style={{
+                            width: '50%',
+                            height: '100%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            border: 'solid 1px',
+                        }}>
+                        <div style={{ width: '100%', height: '50%', display: 'flex', flexDirection: 'row' }}>
+                            <img src={require('../pictures/wind.png')} alt="wind" style={{ width: '20px' }} />
+                            <p>Noise</p>
+                        </div>
+                        <p>{sensorData?.noise}</p>
+                        <p>dB</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        //     {/* Text(
-        //         text = if (weather?.location?.name != null && weather?.location?.name != "null") weather!!.location.name else "No location",
-        //         fontFamily = bold,
-        //         fontSize = 18.sp,
-        //         color = Black
-        //     )
-        // } */}
-        //             {/* Row(verticalAlignment = Alignment.CenterVertically) {
-        //                 if (image != null) {
-        //                     val myBitmap = BitmapFactory.decodeFile(image)
-        //                     Image(
-        //                         bitmap = myBitmap.asImageBitmap(),
-        //                         contentDescription = weather?.current?.condition?.text,
-        //                         modifier = Modifier
-        //                             .size(50.dp)
-        //                             .padding(end = 5.dp)
-        //                     )
-        //                 }
-        //                 Text(
-        //                     if (weather?.current?.temp != null)
-        //                         weather?.current?.temp?.toInt().toString() + "°C" else "",
-        //                     fontFamily = medium,
-        //                     fontSize = 16.sp,
-        //                     color = DarkGray
-        //                 )
-        //             }
-
-        //         }
-        //     }
-
-        //     LazyVerticalGrid(
-        //         columns = GridCells.Fixed(2),
-        //     ) {
-        //         items(dashboardArray) {
-        //             var popupControl by remember { mutableStateOf(false) }
-
-        //             Log.d(MainActivity.tag, "Dashboard: ${it?.name} & popup $popupControl")
-        //             if (popupControl) {
-        //                 Log.d(MainActivity.tag, "Dashboard: in popup ${it?.name}")
-        //                 Popup(
-        //                     alignment = Alignment.BottomCenter,
-        //                     properties = PopupProperties(dismissOnClickOutside = true),
-        //                     onDismissRequest = { popupControl = false }) {
-        //                     Box(
-        //                         Modifier
-        //                             .size(300.dp, 150.dp)
-        //                             .padding(top = 5.dp)
-        //                             .background(LightBlue, RoundedCornerShape(10.dp))
-        //                             .border(1.dp, color = Color.Black, RoundedCornerShape(10.dp))
-        //                     ) {
-        //                         Column(
-        //                             modifier = Modifier
-        //                                 .fillMaxSize()
-        //                                 .padding(horizontal = 20.dp),
-        //                             horizontalAlignment = Alignment.CenterHorizontally,
-        //                             verticalArrangement = Arrangement.Center
-        //                         ) {
-        //                             if (it != null) {
-        //                                 Column() {
-        //                                     Text(
-        //                                         text = it.desc, color = Color.Black,
-        //                                         modifier = Modifier.padding(vertical = 5.dp),
-        //                                         fontFamily = medium
-        //                                     )
-        //                                     if (it.outside != "") {
-        //                                         Text(
-        //                                             text = it.outside + " " + it.unit,
-        //                                             color = Color.Black,
-        //                                             modifier = Modifier.padding(vertical = 5.dp),
-        //                                             fontFamily = medium
-        //                                         )
-        //                                     }
-        //                                 }
-        //                             }
-        //                         }
-        //                     }
-        //                 }
-        //             }
-        //             if (it == null) {
-        //                 Card(
-        //                     modifier = Modifier
-        //                         .padding(bottom = 10.dp)
-        //                         .height(1.dp),
-        //                     backgroundColor = LightBlue
-        //                 ) {
-        //                 }
-        //             } else {
-        //                 Card(
-        //                     modifier = Modifier.padding(all = 10.dp),
-        //                     backgroundColor = White,
-        //                     onClick = {
-        //                         popupControl = !popupControl
-        //                         Log.d(MainActivity.tag, "Dashboard: ${it.name}")
-        //                     }
-        //                 ) {
-        //                     Column(
-        //                         modifier = Modifier
-        //                             .fillMaxWidth()
-        //                             .padding(10.dp)
-        //                     ) {
-        //                         Row(verticalAlignment = Alignment.CenterVertically) {
-        //                             Image(
-        //                                 painterResource(id = it.image),
-        //                                 contentDescription = "",
-        //                                 modifier = Modifier
-        //                                     .size(30.dp)
-        //                                     .background(
-        //                                         if (((it.data ?: 0.0) < minValue[it.id]) || ((it.data
-        //                                                 ?: 0.0) > maxValue[it.id])
-        //                                         ) Red else Green
-        //                                     )
-        //                                     .padding(5.dp),
-        //                                 colorFilter = ColorFilter.tint(color = White)
-        //                             )
-        //                             Text(
-        //                                 text = it.name,
-        //                                 color = Black,
-        //                                 fontSize = 20.sp,
-        //                                 fontFamily = bold,
-        //                                 modifier = Modifier.padding(top = 15.dp, start = 5.dp)
-        //                             )
-
-        //                         }
-        //                         Column(
-        //                             modifier = Modifier.fillMaxWidth(),
-        //                             horizontalAlignment = Alignment.CenterHorizontally
-        //                         ) {
-        //                             NumberText(text = if (it.data != null) it.data.toString() else "")
-        //                             UnitText(text = it.unit)
-        //                         }
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     }
-        // } */}
     );
 };
 
