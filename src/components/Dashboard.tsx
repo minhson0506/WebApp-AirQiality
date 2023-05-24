@@ -11,7 +11,7 @@ import '../App.css';
 const Dashboard = () => {
     const apiUrl = process.env.REACT_APP_API_URL as string;
 
-    const { deviceName, location } = useMainContext();
+    const { device, location } = useMainContext();
 
     const [seconds, setSeconds] = useState(0);
     const [sensorData, setSensorData] = useState<SensorData | null>(null);
@@ -19,7 +19,7 @@ const Dashboard = () => {
 
     // get latest data
     const updateData = async () => {
-        const data = await doGraphQLFetch(apiUrl, getLatestSensorData, { deviceName: deviceName });
+        const data = await doGraphQLFetch(apiUrl, getLatestSensorData, { deviceName: device?.deviceName });
         // console.log('data latest', data);
         setSensorData(data.latestSensorData[0]);
     };
@@ -142,7 +142,7 @@ const Dashboard = () => {
     return (
         <div style={flexBoxWithBG}>
             <div style={Row}>
-                <p style={BoldTextStyle}>{deviceName}</p>
+                <p style={BoldTextStyle}>{device?.deviceName}</p>
                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '5px' }}>
                     <img
                         src={require('../pictures/location.png')}

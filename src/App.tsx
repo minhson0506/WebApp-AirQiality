@@ -3,9 +3,10 @@ import './App.css';
 import LandingPage from './views/LandingPage';
 import { MainContext } from './contexts/MainContext';
 import HomePage from './views/HomePage';
+import {Device} from './interfaces/Device';
 
 function App() {
-    const [deviceName, setDeviceName] = React.useState<string | null>(null);
+    const [device, setDevice] = React.useState<Device | null>(null);
     const [loading, setLoading] = React.useState<boolean>(false);
     const [indicator, setIndicator] = React.useState<string | null>(null);
     const [location, setLocation] = React.useState<string | null>(null);
@@ -24,8 +25,8 @@ function App() {
     return (
         <MainContext.Provider
             value={{
-                deviceName,
-                setDeviceName,
+                device,
+                setDevice,
                 loading,
                 setLoading,
                 indicator,
@@ -55,7 +56,7 @@ function App() {
                 noise,
                 setNoise,
             }}>
-            {deviceName == null ? <LandingPage /> : <HomePage />}
+            {device == null ? <LandingPage /> : <HomePage />}
         </MainContext.Provider>
     );
 }

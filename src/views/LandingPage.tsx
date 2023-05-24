@@ -12,7 +12,7 @@ const LandingPage = () => {
     const [displayDevices, setDisplayDevices] = useState<boolean>(false);
     const [devices, setDevices] = useState<Device[]>([]);
 
-    const { setDeviceName, setLocation } = useMainContext();
+    const { setDevice, setLocation } = useMainContext();
 
     const searchDevices = async () => {
         const data = await doGraphQLFetch(apiUrl, getDevices, {});
@@ -49,7 +49,7 @@ const LandingPage = () => {
                                 <button
                                     style={buttonStyle}
                                     onClick={() => {
-                                        setDeviceName(device.deviceName);
+                                        setDevice(device);
                                     }}
                                     key={device.deviceId}>
                                     {device.deviceName}

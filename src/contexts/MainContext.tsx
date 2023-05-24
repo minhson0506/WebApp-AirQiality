@@ -1,8 +1,9 @@
 import {createContext, useContext} from "react";
+import {Device} from "../interfaces/Device";
 
 export type ContextType = {
-    deviceName: string | null;
-    setDeviceName: React.Dispatch<React.SetStateAction<string | null>>;
+    device: Device | null;
+    setDevice: React.Dispatch<React.SetStateAction<Device | null>>;
     loading: boolean;
     setLoading: React.Dispatch<React.SetStateAction<boolean>>;
     indicator: string | null;
@@ -34,8 +35,8 @@ export type ContextType = {
 };
 
 export const MainContext = createContext<ContextType>({
-    deviceName: null,
-    setDeviceName: () => {},
+    device: null,
+    setDevice: () => {},
     loading: false,
     setLoading: () => {},
     indicator: null,

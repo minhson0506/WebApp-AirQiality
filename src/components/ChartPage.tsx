@@ -14,11 +14,10 @@ interface Props {}
 const ChartPage: React.FC<Props> = () => {
     const apiUrl = process.env.REACT_APP_API_URL as string;
 
-    const { deviceName, loading, indicator } = useMainContext();
+    const { device, loading, indicator } = useMainContext();
 
     const [showDetails, setShowDetails] = useState(false);
     const [data, setData] = useState<string>(format(new Date(), 'yyyy-MM-dd'));
-    const [sensorData, setSensorData] = useState<SensorData[]>([]);
     const [dataDisplay, setDataDisplay] = useState<DataDisplay[]>([]);
 
     const showDetailsHandle = (dayStr: string) => {
@@ -29,7 +28,7 @@ const ChartPage: React.FC<Props> = () => {
     const indicatorData = ['alt', 'co2', 'hum', 'lux', 'noise', 'pm1', 'pm10', 'pm2_5', 'pm4', 'pres', 'temp'];
     // get data for display
     const getData = async () => {
-        const response = await doGraphQLFetch(apiUrl, getSensorDataInDate, { deviceName: deviceName, date: data });
+        const response = await doGraphQLFetch(apiUrl, getSensorDataInDate, { deviceName: device?.deviceName, date: data });
         // console.log(`data in date ${data}`, response);
         // setSensorData(response.sensorDataInDate);
         let dataDisplays: DataDisplay[];
