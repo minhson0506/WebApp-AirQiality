@@ -9,6 +9,8 @@ import CSS from 'csstype';
 import '../App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Dashboard = () => {
     const apiUrl = process.env.REACT_APP_API_URL as string;
@@ -38,6 +40,10 @@ const Dashboard = () => {
         const json = await response.json();
         // console.log('weather', json);
         setWeather(json);
+    };
+
+    const showDetail = (details: string) => {
+        toast.info(details);
     };
 
     useEffect(() => {
@@ -180,7 +186,7 @@ const Dashboard = () => {
                 {dashboardArray.map((item, index) => (
                     <div className="grid-item" key={index}>
                         {item && (
-                            <div style={ColumnGap}>
+                            <div style={ColumnGap} onClick={() => showDetail(item.description)}>
                                 <div style={RowGap}>
                                     <div style={ImageStyle}>
                                         <img src={item.image} alt={item.name} />
@@ -196,6 +202,7 @@ const Dashboard = () => {
                     </div>
                 ))}
             </div>
+            <ToastContainer />
         </div>
     );
 };
