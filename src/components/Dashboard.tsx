@@ -20,6 +20,7 @@ const Dashboard = () => {
     const [seconds, setSeconds] = useState(0);
     const [sensorData, setSensorData] = useState<SensorData | null>(null);
     const [weather, setWeather] = useState<Weather | null>(null);
+    const { pm10, pm25, pm1, pm4, lux, temp, co2, hum, pres, noise } = useMainContext();
 
     // get latest data
     const updateData = async () => {
@@ -147,6 +148,9 @@ const Dashboard = () => {
         },
     ];
 
+    const minValues = [pm10[0], pm25[0], pm1[0], pm4[0], co2[0], hum[0], lux[0], pres[0], noise[0], temp[0]];
+    const maxValues = [pm10[1], pm25[1], pm1[1], pm4[1], co2[1], hum[1], lux[1], pres[1], noise[0], temp[1]];
+
     return (
         <div style={flexBoxWithBG}>
             <div style={Row}>
@@ -183,24 +187,37 @@ const Dashboard = () => {
                 </div>
             </div>
             <div className="dashboard-grid">
-                {dashboardArray.map((item, index) => (
-                    <div className="grid-item" key={index}>
-                        {item && (
-                            <div style={ColumnGap} onClick={() => showDetail(item.description)}>
-                                <div style={RowGap}>
-                                    <div style={ImageStyle}>
-                                        <img src={item.image} alt={item.name} />
+                {dashboardArray.map((item, index) => {
+                    const minValue = minValues[index];
+                    const maxValue = maxValues[index];
+                    const isValueOutOfRange = item.value && (item.value < minValue || item.value > maxValue);
+
+                    const dynamicImageStyle = {
+                        ...ImageStyle,
+                        backgroundColor: isValueOutOfRange ? colors.darkRed : colors.darkGreen,
+                    };
+
+                    return (
+                        <div className="grid-item" key={index}>
+                            {item && (
+                                <div style={ColumnGap} onClick={() => showDetail(item.description)}>
+                                    <div style={RowGap}>
+                                        <div style={dynamicImageStyle}>
+                                            <img src={item.image} alt={item.name} />
+                                        </div>
+                                        <p style={BoldTextStyle}>{item.name}</p>
                                     </div>
-                                    <p style={BoldTextStyle}>{item.name}</p>
+                                    <div style={ColumnGap}>
+                                        <p style={{ fontSize: '25px', fontWeight: 'bold', color: 'black' }}>
+                                            {item.value}
+                                        </p>
+                                        <p>{item.unit}</p>
+                                    </div>
                                 </div>
-                                <div style={ColumnGap}>
-                                    <p style={{ fontSize: '25px', fontWeight: 'bold', color: 'black' }}>{item.value}</p>
-                                    <p>{item.unit}</p>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                ))}
+                            )}
+                        </div>
+                    );
+                })}
             </div>
             <ToastContainer />
         </div>
@@ -237,7 +254,6 @@ const RowGap: CSS.Properties = {
 };
 
 const ImageStyle: CSS.Properties = {
-    backgroundColor: colors.darkGreen,
     width: '30px',
     height: '30px',
     display: 'flex',
