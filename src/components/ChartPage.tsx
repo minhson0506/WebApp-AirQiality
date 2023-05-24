@@ -8,6 +8,8 @@ import { SensorData } from '../interfaces/SensorData';
 import Chart from './Chart';
 import { DataDisplay } from '../interfaces/DataDisplay';
 import PickerComponent from './PickerComponent';
+import { flexBoxWithBG } from '../styles';
+import CSS from 'csstype';
 
 interface Props {}
 
@@ -25,10 +27,13 @@ const ChartPage: React.FC<Props> = () => {
         setShowDetails(true);
     };
 
-    const indicatorData = ['alt', 'co2', 'hum', 'lux', 'noise', 'pm1', 'pm10', 'pm2_5', 'pm4', 'pres', 'temp'];
+    const indicatorData = ['pm10', 'pm2_5', 'pm1', 'pm4', 'co2', 'hum', 'lux', 'noise', 'pres', 'temp'];
     // get data for display
     const getData = async () => {
-        const response = await doGraphQLFetch(apiUrl, getSensorDataInDate, { deviceName: device?.deviceName, date: data });
+        const response = await doGraphQLFetch(apiUrl, getSensorDataInDate, {
+            deviceName: device?.deviceName,
+            date: data,
+        });
         // console.log(`data in date ${data}`, response);
         // setSensorData(response.sensorDataInDate);
         let dataDisplays: DataDisplay[];
@@ -36,9 +41,6 @@ const ChartPage: React.FC<Props> = () => {
             dataDisplays = response.sensorDataInDate.map((sensor: SensorData) => {
                 let value: DataDisplay;
                 switch (indicator) {
-                    case 'alt':
-                        value = { time: sensor.time, value: sensor.alt };
-                        break;
                     case 'co2':
                         value = { time: sensor.time, value: sensor.co2 };
                         break;
@@ -79,22 +81,23 @@ const ChartPage: React.FC<Props> = () => {
             dataDisplays = response.sensorDataInDate.map((sensor: SensorData) => {
                 return { time: sensor.time, value: sensor.alt };
             });
-        
+
         // filter data in hours
-        dataDisplays = dataDisplays.map((curr: DataDisplay) => {
-            let time = new Date(curr.time);
-            time.setSeconds(0);
-            time.setMinutes(0);
-            return { time: time, value: curr.value };
-        }).reduce((acc: DataDisplay[], curr: DataDisplay) => {
-            if (acc.length === 0) {
-                acc.push(curr);
-            } else {
-                if (!acc.find((item) => item.time.getTime() === curr.time.getTime()))
+        dataDisplays = dataDisplays
+            .map((curr: DataDisplay) => {
+                let time = new Date(curr.time);
+                time.setSeconds(0);
+                time.setMinutes(0);
+                return { time: time, value: curr.value };
+            })
+            .reduce((acc: DataDisplay[], curr: DataDisplay) => {
+                if (acc.length === 0) {
                     acc.push(curr);
-            }
-            return acc;
-        }, []);
+                } else {
+                    if (!acc.find((item) => item.time.getTime() === curr.time.getTime())) acc.push(curr);
+                }
+                return acc;
+            }, []);
 
         setDataDisplay(dataDisplays);
     };
@@ -104,14 +107,22 @@ const ChartPage: React.FC<Props> = () => {
     }, [loading]);
 
     return (
-        <div style={{ height: '100%' }}>
-            <p> This is Chart Page </p>
-            <Calendar showDetailsHandle={showDetailsHandle} />
-            {showDetails ? <p>{data}</p> : <></>}
-            <PickerComponent data={indicatorData} />
-            {dataDisplay.length > 0 ? <Chart data={dataDisplay} /> : <p>No data</p>}
+        <div style={flexBoxWithBG}>
+            <div style={fullViewBG}>
+                <Calendar showDetailsHandle={showDetailsHandle} />
+                <PickerComponent data={indicatorData} />
+                {dataDisplay.length > 0 ? <Chart data={dataDisplay} /> : <p>No data</p>}
+            </div>
         </div>
     );
 };
 
 export default ChartPage;
+
+const fullViewBG: CSS.Properties = {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '20px',
+    alignItems: 'center',
+    height: '100vh',
+};

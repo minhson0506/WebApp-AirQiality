@@ -12,6 +12,8 @@ import {
     subWeeks,
 } from 'date-fns';
 import { useMainContext } from '../contexts/MainContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
     showDetailsHandle: (dayStr: string) => void;
@@ -57,18 +59,14 @@ const Calendar: React.FC<Props> = (prop: Props) => {
         // console.log("selected day", selectedDate);
         return (
             <div className="header row flex-middle">
-                <div className="col col-start">
-                    <div className="icon" onClick={() => changeMonthHandle('prev')}>
-                        prev month
-                    </div>
+                <div className="col col-start" onClick={() => changeMonthHandle('prev')}>
+                    <FontAwesomeIcon className="icon" icon={faAngleLeft} />
                 </div>
                 <div className="col col-center">
                     <span>{format(currentMonth, dateFormat)}</span>
                 </div>
-                <div className="col col-end">
-                    <div className="icon" onClick={() => changeMonthHandle('next')}>
-                        next month
-                    </div>
+                <div className="col col-end" onClick={() => changeMonthHandle('next')}>
+                    <FontAwesomeIcon className="icon" icon={faAngleRight} />
                 </div>
             </div>
         );
@@ -133,14 +131,12 @@ const Calendar: React.FC<Props> = (prop: Props) => {
     const renderFooter = () => {
         return (
             <div className="header row flex-middle">
-                <div className="col col-start">
-                    <div className="icon" onClick={() => changeWeekHandle('prev')}>
-                        prev week
-                    </div>
+                <div className="col col-start" onClick={() => changeWeekHandle('prev')}>
+                    <FontAwesomeIcon className="icon" icon={faAngleLeft} />
                 </div>
-                <div>{currentWeek}</div>
+                <div>{'Week ' + currentWeek}</div>
                 <div className="col col-end" onClick={() => changeWeekHandle('next')}>
-                    <div className="icon">next week</div>
+                    <FontAwesomeIcon className="icon" icon={faAngleRight} />
                 </div>
             </div>
         );

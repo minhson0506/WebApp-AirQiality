@@ -16,7 +16,7 @@ const Chart: React.FC<Props> = (props: Props) => {
 
     // console.log('data', data);
     const width = 600;
-    const height = 400;
+    const height = 500;
     const margin = { top: 20, right: 30, bottom: 30, left: 40 };
 
     const x = d3
@@ -37,18 +37,18 @@ const Chart: React.FC<Props> = (props: Props) => {
         .y((d) => y(d.value));
 
     return (
-        <div>
-            <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
-                <g transform={`translate(0,${height - margin.bottom})`}>
+        <div style={{ width: '100%', padding: 0, margin: 0, alignSelf: 'center' }}>
+            <svg viewBox={`0 0 ${width} ${height}`}>
+                <g transform={`translate(0,${height - margin.bottom})`} strokeWidth={2} style={{ fontSize: '16px' }}>
                     <Axis scale={x} orient={Orient.bottom} />
                 </g>
-                <g transform={`translate(${margin.left},0)`}>
+                <g transform={`translate(${margin.left},0)`} strokeWidth={2}>
                     <Axis scale={y} orient={Orient.left} />
                 </g>
                 <path
                     fill="none"
                     stroke="steelblue"
-                    strokeWidth="1.5"
+                    strokeWidth="2"
                     strokeLinejoin="round"
                     strokeLinecap="round"
                     d={line(data) as string}

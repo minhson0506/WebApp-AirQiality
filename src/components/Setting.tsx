@@ -3,9 +3,9 @@ import 'rsuite/dist/rsuite.css';
 import { useMainContext } from '../contexts/MainContext';
 import { BoldTextStyle, colors, flexBoxWithBG } from '../styles';
 import CSS from 'csstype';
-import {useState} from 'react';
-import {doGraphQLFetch} from '../hooks/fetch';
-import {updateDevice} from '../hooks/queries';
+import { useState } from 'react';
+import { doGraphQLFetch } from '../hooks/fetch';
+import { updateDevice } from '../hooks/queries';
 
 const Setting = () => {
     const apiUrl = process.env.REACT_APP_API_URL as string;
@@ -35,8 +35,7 @@ const Setting = () => {
         setDevice,
     } = useMainContext();
 
-    const [deviceName, setDeviceName] = useState<string>(device? device.deviceName : "")
-
+    const [deviceName, setDeviceName] = useState<string>(device ? device.deviceName : '');
 
     const settingArray = [
         {
@@ -112,12 +111,15 @@ const Setting = () => {
     ];
 
     const changeName = async () => {
-        const response = await doGraphQLFetch(apiUrl, updateDevice, {id: device?.id, deviceId: device?.deviceId, deviceName: deviceName})
+        const response = await doGraphQLFetch(apiUrl, updateDevice, {
+            id: device?.id,
+            deviceId: device?.deviceId,
+            deviceName: deviceName,
+        });
         if (response) {
-            alert("Changed name of device successful")
+            alert('Changed name of device successful');
         }
-        if (device)
-            setDevice({id: device.id, deviceId: device?.deviceId, deviceName: deviceName})
+        if (device) setDevice({ id: device.id, deviceId: device?.deviceId, deviceName: deviceName });
     };
 
     return (
@@ -127,8 +129,8 @@ const Setting = () => {
                 <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
                     <input
                         value={deviceName}
-                        onChange={e => {
-                            setDeviceName(e.target.value)
+                        onChange={(e) => {
+                            setDeviceName(e.target.value);
                         }}
                         style={{
                             border: '0px',

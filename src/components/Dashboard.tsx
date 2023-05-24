@@ -4,9 +4,11 @@ import { doGraphQLFetch } from '../hooks/fetch';
 import { getLatestSensorData } from '../hooks/queries';
 import { SensorData } from '../interfaces/SensorData';
 import { Weather } from '../interfaces/Weather';
-import { BoldTextStyle, NormalTextStyle, colors, flexBox, flexBoxWithBG } from '../styles';
+import { BoldTextStyle, NormalTextStyle, colors, flexBoxWithBG } from '../styles';
 import CSS from 'csstype';
 import '../App.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Dashboard = () => {
     const apiUrl = process.env.REACT_APP_API_URL as string;
@@ -144,11 +146,7 @@ const Dashboard = () => {
             <div style={Row}>
                 <p style={BoldTextStyle}>{device?.deviceName}</p>
                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '5px' }}>
-                    <img
-                        src={require('../pictures/location.png')}
-                        alt="location"
-                        style={{ width: '20px', height: '20px' }}
-                    />
+                    <FontAwesomeIcon style={{ color: colors.darkRed }} icon={faMapMarkerAlt} />
                     <p style={BoldTextStyle}>
                         {weather?.location?.name !== null && weather?.location?.name.toLowerCase() !== 'nulles'
                             ? weather?.location?.name
@@ -167,14 +165,14 @@ const Dashboard = () => {
                         </p>
                     </div>
                 )}
-                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '5px' }}>
                     <img
                         src={`https:${weather?.current?.condition?.icon}`}
                         alt="temperature"
                         style={{ width: '30px', height: '30px' }}
                     />
                     <p style={BoldTextStyle}>
-                        {weather?.current?.temp_c !== null ? weather?.current?.temp_c?.toFixed(1) + '°C' : ''}
+                        {weather?.current?.temp_c !== null ? weather?.current?.temp_c?.toFixed(0) + '°C' : ''}
                     </p>
                 </div>
             </div>
