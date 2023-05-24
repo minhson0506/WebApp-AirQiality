@@ -45,6 +45,7 @@ const Dashboard = () => {
 
     const showDetail = (details: string) => {
         toast.info(details);
+        // show out door data also here
     };
 
     useEffect(() => {
