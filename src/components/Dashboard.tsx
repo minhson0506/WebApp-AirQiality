@@ -74,6 +74,7 @@ const Dashboard = () => {
             value: sensorData?.pm10,
             unit: 'µg/m3',
             description: 'Particle density of particulate Matter(PM) in size range 0.3µm to 10.0µm in µg/m3',
+            outside: `Outside: ${weather?.current.air_quality.pm10.toFixed(1)}µg/m3`,
         },
         {
             id: 1,
@@ -82,6 +83,7 @@ const Dashboard = () => {
             value: sensorData?.pm2_5,
             unit: 'µg/m3',
             description: 'Particle density of particulate Matter(PM) in size range 0.3µm to 2.5µm in µg/m3',
+            outside: `Outside: ${weather?.current.air_quality.pm2_5.toFixed(1)}µg/m3`,
         },
         {
             id: 2,
@@ -90,6 +92,7 @@ const Dashboard = () => {
             value: sensorData?.pm1,
             unit: 'µg/m3',
             description: 'Particle density of particulate Matter(PM) in size range 0.3µm to 1.0µm in µg/m3',
+            outside: ``,
         },
         {
             id: 3,
@@ -98,6 +101,7 @@ const Dashboard = () => {
             value: sensorData?.pm4,
             unit: 'µg/m3',
             description: 'Particle density of particulate Matter(PM) in size range 0.3µm to 4.0µm in µg/m3',
+            outside: ``,
         },
         {
             id: 4,
@@ -106,6 +110,7 @@ const Dashboard = () => {
             value: sensorData?.co2,
             unit: 'ppm',
             description: 'Carbon dioxide in ppm',
+            outside: `Outside: ${weather?.current.air_quality.co.toFixed(1)}ppm`,
         },
         {
             id: 5,
@@ -114,6 +119,7 @@ const Dashboard = () => {
             value: sensorData?.hum,
             unit: 'RH',
             description: 'Humidity in %RH',
+            outside: `Outside: ${weather?.current.humidity.toFixed(1)}RH`,
         },
         {
             id: 6,
@@ -122,6 +128,7 @@ const Dashboard = () => {
             value: sensorData?.lux,
             unit: 'lux',
             description: 'Lighting in lux',
+            outside: ``,
         },
         {
             id: 7,
@@ -130,6 +137,7 @@ const Dashboard = () => {
             value: sensorData?.noise,
             unit: 'dB',
             description: 'Loudness in dB',
+            outside: ``,
         },
         {
             id: 8,
@@ -138,6 +146,7 @@ const Dashboard = () => {
             value: sensorData?.pres,
             unit: 'hPa',
             description: 'Pressure in hPa',
+            outside: `Outside: ${weather?.current.pressure_mb.toFixed(1)}hPa`,
         },
         {
             id: 9,
@@ -146,6 +155,7 @@ const Dashboard = () => {
             value: sensorData?.temp,
             unit: '°C',
             description: 'Temperature in °C',
+            outside: `Outside: ${weather?.current.temp_c.toFixed(1)}°C`,
         },
     ];
 
@@ -201,7 +211,11 @@ const Dashboard = () => {
                     return (
                         <div className="grid-item" key={index}>
                             {item && (
-                                <div style={ColumnGap} onClick={() => showDetail(item.description)}>
+                                <div
+                                    style={ColumnGap}
+                                    onClick={() =>
+                                        showDetail(item.description + '\n' + item.outside)
+                                    }>
                                     <div style={RowGap}>
                                         <div style={dynamicImageStyle}>
                                             <img src={item.image} alt={item.name} />
