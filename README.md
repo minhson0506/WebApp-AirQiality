@@ -18,12 +18,12 @@ The indoor air quality monitoring application is designed to provide users with 
 ## Screenshots of the app
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/85672212/220932897-6d1af2ba-66bb-4dcb-9a0e-4ab7604d5e04.jpg" width="250"> 
-  <img src="https://user-images.githubusercontent.com/85672212/220932990-7a20e578-1840-4014-93ba-e35085205bac.jpg" width="250"> 
+  <img src="https://github.com/minhson0506/web-airquality/assets/85672212/e22a777d-db94-4ceb-86d7-fb5a4845a9d8" width="250"> 
+  <img src="https://github.com/minhson0506/web-airquality/assets/85672212/b415522f-af2b-4a81-bfd1-611978aac077" width="250"> 
 </p> 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/85672212/220933297-215110d6-cc63-406d-a560-00b156fc3ebc.jpg" width="250"> 
-  <img src="https://user-images.githubusercontent.com/85672212/220933364-c054f6df-b342-4d45-88f9-4fe2b57a837b.jpg" width="250"> 
+  <img src="https://github.com/minhson0506/web-airquality/assets/85672212/8af099ea-5eb8-4984-8901-95886ba11f12" width="250"> 
+  <img src="https://github.com/minhson0506/web-airquality/assets/85672212/23833cb2-10ff-4665-aed3-9b581fa537da" width="250"> 
 </p> 
 
 ## Installation
