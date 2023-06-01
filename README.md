@@ -1,46 +1,48 @@
-# Getting Started with Create React App
+<img src="https://user-images.githubusercontent.com/85672212/220930469-f61ff00d-6b8f-4554-88dd-717c1f25219a.png" width ="100">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# ISP web application 
 
-## Available Scripts
+The indoor air quality monitoring application is designed to provide users with real-time information about the quality of the air in their surroundings. This application is able to show key indicators of air quality, such as PM10, PM2.5, temperature, humidity and carbon dioxide levels, etc. and alert to users in case of hazardous conditions. The data collected by the application is displayed in an easy-to-read dashboard that allows users to quickly identify areas of concern and take action to improve the air quality.
 
-In the project directory, you can run:
+## App features
 
-### `npm start`
+- API service providing remote monitoring without the need of direct access to hardware device
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Display all important key indicators in dashboard with colors signify safe or unsafe conditions
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Display outdoor weather information for comparison with indoor air quality
 
-### `npm test`
+- Track data with built-in calendar and charts to see fluctuation of the values
+ 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Screenshots of the app
 
-### `npm run build`
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/85672212/220932897-6d1af2ba-66bb-4dcb-9a0e-4ab7604d5e04.jpg" width="250"> 
+  <img src="https://user-images.githubusercontent.com/85672212/220932990-7a20e578-1840-4014-93ba-e35085205bac.jpg" width="250"> 
+</p> 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/85672212/220933297-215110d6-cc63-406d-a560-00b156fc3ebc.jpg" width="250"> 
+  <img src="https://user-images.githubusercontent.com/85672212/220933364-c054f6df-b342-4d45-88f9-4fe2b57a837b.jpg" width="250"> 
+</p> 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone ISP web-airquality to local:
+```
+$ git clone [https://github.com/minhson0506/AndroidApp-AirQuality.git](https://github.com/minhson0506/web-airquality.git)
+```
+2. Open project in any preferred editor
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Retrieve API key for Weather information from ```https://www.weatherapi.com/docs/```
 
-### `npm run eject`
+4. Add your API key to projects: In ```local.properties```, add line ```API_KEY=<YOUR_KEY>```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+5. Run ```npm install``` to install dependencies
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+6. Run ```npm start``` to start application in your local host
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Contributors
+[My Mai](https://github.com/thuymymai)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+[Son Dang](https://github.com/minhson0506)
