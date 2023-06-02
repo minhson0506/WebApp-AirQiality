@@ -28,7 +28,7 @@ The indoor air quality monitoring application is designed to provide users with 
   <img src="https://github.com/minhson0506/web-airquality/assets/85672212/23833cb2-10ff-4665-aed3-9b581fa537da" width="250"> 
 </p> 
 
-## Installation
+## Installation in local
 
 1. Clone ISP web-airquality to local:
 ```
@@ -36,13 +36,9 @@ $ git clone [https://github.com/minhson0506/AndroidApp-AirQuality.git](https://g
 ```
 2. Open project in any preferred editor
 
-3. Retrieve API key for Weather information from ```https://www.weatherapi.com/docs/```
+3. Run ```npm install``` to install dependencies
 
-4. Add your API key to projects: In ```local.properties```, add line ```API_KEY=<YOUR_KEY>```
-
-5. Run ```npm install``` to install dependencies
-
-6. Run ```npm start``` to start application in your local host
+4. Run ```npm start``` to start application in your local host
 
 ## Contributors
 [My Mai](https://github.com/thuymymai)
