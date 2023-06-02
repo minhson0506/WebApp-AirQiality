@@ -32,7 +32,7 @@ const Dashboard = () => {
     // get weather data
     const getWeatherData = async () => {
         const response = await fetch(
-            `http://api.weatherapi.com/v1/current.json?key=ed7111cc88ee4769858141158222207&q=${location}&aqi=yes&day=10`,
+            `https://api.weatherapi.com/v1/current.json?key=ed7111cc88ee4769858141158222207&q=${location}&aqi=yes&day=10`,
         );
         if (!response.ok) {
             console.log('error');
